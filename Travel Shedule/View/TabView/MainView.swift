@@ -1,10 +1,3 @@
-//
-//  MainView.swift
-//  Travel Shedule
-//
-//  Created by Александр Клопков on 23.10.2025.
-//
-
 import SwiftUI
 
 enum Route:  Hashable {
@@ -51,9 +44,9 @@ struct MainView: View {
                 case .toStationsListView:
                     StationListView(path: $path, viewModel: $viewModel, city: $city, isFrom: false)
                 case .carrierListView:
-                    CarrierListView(viewModel: viewModel)
+                    CarrierListView(path: $path, viewModel: viewModel)
                 case .scheduleFilterView:
-                    Text("")
+                    ScheduleFilterView()
                 }
             }
         }

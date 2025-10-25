@@ -153,7 +153,7 @@ paths:
         - name: transfers
           in: query
           description: Включить маршруты с пересадками (true/false)
-          required: false
+          required: true
           schema:
             type: boolean
       responses:

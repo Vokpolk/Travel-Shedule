@@ -17,6 +17,7 @@ import Foundation
             do {
                 guard let servicesProvider else { return }
                 
+                self.schedules.removeAll()
                 let schedules = try await servicesProvider
                     .schedualBetweenStationsService
                     .getSchedualBetweenStations(
@@ -24,11 +25,7 @@ import Foundation
                         from: from,
                         to: to
                     )
-                
-                var a = 10
-                
                 print("testFetchSheduleBetweenStations: OK")
-                
                 initSchedules(schedules)
             } catch {
                 print("testFetchSheduleBetweenStations: FAIL")
@@ -37,22 +34,38 @@ import Foundation
     }
     
     private func initSchedules(_ schedules: SchedualBetweenStations) {
-        
         guard let schedules_ = schedules.segments else { return }
         for schedule in schedules_ {
+            
+            var imageUrl: String?
+            if let imageUrlSchedule = schedule.thread?.carrier?.logo {
+                imageUrl = imageUrlSchedule
+            }
+            var date: String?
+            if let dateSchedule = schedule.start_date {
+                date = formatDateString(dateSchedule)
+            }
+            var departureTime: String?
+            if let departureTimeSchedule = schedule.departure {
+                departureTime = formatTimeString(departureTimeSchedule)
+            }
+            
+            var arrivalTime: String?
+            if let arrivalTimeSchedule = schedule.arrival {
+                arrivalTime = formatTimeString(arrivalTimeSchedule)
+            }
+            
+            
             self.schedules.append(Schedule(
                 carrierName: schedule.thread?.carrier?.title,
-                carrierImage: schedule.thread?.carrier?.logo,
-                date: schedule.start_date,
+                carrierImage: imageUrl,
+                date: date,
                 hasTransfer: schedule.has_transfers,
-                departureTime: schedule.departure,
-                arrivalTime: schedule.arrival,
-                travelTime: schedule.duration
+                departureTime: departureTime,
+                arrivalTime: arrivalTime,
+                travelTime: (schedule.duration ?? 0) / 3600
             ))
         }
-        
-        var a = 10
-        
     }
     
     private func fetchAllStations() {
@@ -99,5 +112,30 @@ import Foundation
                 }
             }
         }
+    }
+    
+    private func formatDateString(_ dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        
+        guard let date = dateFormatter.date(from: dateString) else {
+            return nil
+        }
+        
+        dateFormatter.dateFormat = "d MMMM"
+        return dateFormatter.string(from: date)
+    }
+    
+    private func formatTimeString(_ timeString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        
+        guard let date = dateFormatter.date(from: timeString) else {
+            return nil
+        }
+        
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
     }
 }

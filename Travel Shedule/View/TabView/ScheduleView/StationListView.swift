@@ -81,13 +81,6 @@ struct StationListView: View {
             }
             .listStyle(PlainListStyle())
             .tint(.black)
-            Spacer()
-            
-            Button("Go to StationListView") {
-//                print("cityName: \(cityName)")
-                path.removeAll()
-            }
-            .buttonStyle(.borderedProminent)
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
