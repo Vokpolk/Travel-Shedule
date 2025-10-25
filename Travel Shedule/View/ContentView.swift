@@ -4,28 +4,66 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 struct ContentView: View {
-    
-    private let servicesProvider: ServicesProvider? = ServicesProvider(apikey: Constants.apikey)
+    @State private var viewModel = SourceViewModel()
+    private let servicesProvider: ServicesProvider? = nil//ServicesProvider(apikey: Constants.apikey)
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                TabView {
+                    VStack {
+                        StoriesView()
+                        ScheduleCellView(viewModel: $viewModel) {
+                            print("TEST")
+                        }
+                        Spacer()
+                    }
+                    .tabItem {
+                        Label {
+                            Text("Расписание")
+                                .foregroundColor(.black)
+                        } icon: {
+                            Image(.schedule)
+                                .renderingMode(.template)
+                                .foregroundColor(.black)
+                        }
+                        .labelStyle(.iconOnly)
+                    }
+                    ZStack {
+                        Color.blue.edgesIgnoringSafeArea(.top)
+                        Text("Экран настроек")
+                            .font(.largeTitle)
+                            .foregroundColor(.white)
+                    }
+                    .tabItem {
+                        Label {
+                            Text("Настройки")
+                                .foregroundColor(.black)
+                        } icon: {
+                            Image(.settings)
+                                .renderingMode(.template)
+                                .foregroundColor(.black)
+                        }
+                        .labelStyle(.iconOnly)
+                    }
+                }
+                .tint(.black)
+            }
         }
-        .padding()
         .onAppear {
-            testFetchStations()
-            testFetchSheduleBetweenStations()
-            testFetchStationSchedule()
-            testFetchRouteStations()
-            testFetchNearestCity()
-            testFetchCarrierInfo()
-            testFetchAllStations()
-            testFetchCopyright()
+            print(ErrorType.server.description)
+            print("APPEARED")
+//                        testFetchStations()
+//                        testFetchSheduleBetweenStations()
+//                        testFetchStationSchedule()
+//                        testFetchRouteStations()
+//                        testFetchNearestCity()
+//                        testFetchCarrierInfo()
+//            testFetchAllStations()
+//                        testFetchCopyright()
         }
     }
+        
     
     func testFetchStations() {
         Task {
@@ -136,8 +174,17 @@ struct ContentView: View {
             do {
                 guard let servicesProvider else { return }
                 
-                let _ = try await servicesProvider.allStationService.getAllStations()
-                
+                let data = try await servicesProvider.allStationService.getAllStations()
+                let country = data.countries?.filter({ country in
+                    if country.title == "Россия" {
+                        print("РОССИЯ")
+                        return true
+                    }
+                    return false
+                })
+//                country[0].regions?.forEach({ region in
+//                    region.
+//                })
                 print("testFetchCarrierInfo: OK")
             } catch {
                 print("testFetchCarrierInfo: FAIL")

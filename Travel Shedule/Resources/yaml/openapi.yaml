@@ -520,8 +520,14 @@ components:
           description: Время прибытия
         thread:
           $ref: '#/components/schemas/Thread'
+        has_transfers:
+          type: boolean
+          description: Признак наличия пересадок по маршруту.
         tickets_info:
           $ref: '#/components/schemas/TicketsInfo'
+        start_date:
+          type: string
+          description: Дата отправления рейса
         duration:
           type: integer
           description: Длительность рейса в секундах

@@ -4,7 +4,8 @@ import SwiftUI
 struct Travel_SheduleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            MainView()
         }
     }
 }
