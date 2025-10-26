@@ -6,14 +6,15 @@ struct ChooseStationRowView: View {
         HStack {
             Text(title)
                 .font(.system(size: 17, weight: .regular))
+                .foregroundColor(.ypBlack)
             
             Spacer()
             
             Image(systemName: "chevron.right")
-                .foregroundColor(.black) // Черная стрелка
+                .foregroundColor(.ypBlack)
                 .font(.system(size: 18, weight: .medium))
         }
-        .padding(.vertical, 18) // Вертикальный паддинг для удобства тапа
+        .padding(.vertical, 18)
         .contentShape(Rectangle())
     }
 }

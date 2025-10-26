@@ -1,10 +1,3 @@
-//
-//  CarrierCellView.swift
-//  Travel Shedule
-//
-//  Created by Александр Клопков on 25.10.2025.
-//
-
 import SwiftUI
 import Kingfisher
 
@@ -41,6 +34,7 @@ struct CarrierCellView: View {
                         
                         Text(schedule.date ?? "Нет даты")
                             .font(.system(size: 12, weight: .regular))
+                            .foregroundStyle(.ypBlackUniversal)
                     }
                     Spacer()
                     HStack {

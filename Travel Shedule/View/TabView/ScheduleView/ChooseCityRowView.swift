@@ -1,10 +1,3 @@
-//
-//  ChooseCityRowView.swift
-//  Travel Shedule
-//
-//  Created by Александр Клопков on 22.10.2025.
-//
-
 import SwiftUI
 
 struct ChooseCityRowView: View {
@@ -14,15 +7,15 @@ struct ChooseCityRowView: View {
         HStack {
             Text(title)
                 .font(.system(size: 17, weight: .regular))
-                .foregroundColor(.ypBlack) // Черная стрелка
+                .foregroundColor(.ypBlack)
             
             Spacer()
             
             Image(systemName: "chevron.right")
                 .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.ypBlack) // Черная стрелка
+                .foregroundColor(.ypBlack)
         }
-        .padding(.vertical, 18) // Вертикальный паддинг для удобства тапа
+        .padding(.vertical, 18)
         .contentShape(Rectangle())
     }
 }

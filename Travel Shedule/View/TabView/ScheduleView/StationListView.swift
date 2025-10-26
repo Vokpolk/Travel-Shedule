@@ -1,17 +1,9 @@
-//
-//  StationListView.swift
-//  Travel Shedule
-//
-//  Created by Александр Клопков on 23.10.2025.
-//
-
 import SwiftUI
 
 struct StationListView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var path: [Route]
     @Binding var viewModel: SourceViewModel
-//    var cityName: String = ""
     @Binding var city: City
     @State var stationName: String = ""
     var isFrom: Bool
@@ -80,27 +72,23 @@ struct StationListView: View {
                 }
             }
             .listStyle(PlainListStyle())
-            .tint(.black)
+            .tint(.ypBlack)
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationTitle("Выбор станции")
         .navigationBarTitleDisplayMode(.inline)
+        .background(.ypWhite)
     }
     
-    // Кастомная кнопка назад в виде галочки
     private var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {
             Image(systemName: "chevron.left")
-                .foregroundColor(.black)
+                .foregroundColor(.ypBlack)
                 .font(.system(size: 18, weight: .medium))
                 .padding(8)
         }
     }
 }
-
-//#Preview {
-//    StationListView()
-//}

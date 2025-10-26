@@ -1,7 +1,7 @@
 import Foundation
 
 @Observable class SourceViewModel {
-    
+    var serverError: Bool = false
     var cities: [City] = []
     var schedules: [Schedule] = []
     var firstData: CurrentStation = CurrentStation(settlementName: "", stationName: "", code: "")
@@ -12,24 +12,23 @@ import Foundation
         fetchAllStations()
     }
     
-    func fetchSchedule(from: String, to: String) {
-        Task {
-            do {
-                guard let servicesProvider else { return }
-                
-                self.schedules.removeAll()
-                let schedules = try await servicesProvider
-                    .schedualBetweenStationsService
-                    .getSchedualBetweenStations(
-                        
-                        from: from,
-                        to: to
-                    )
-                print("testFetchSheduleBetweenStations: OK")
-                initSchedules(schedules)
-            } catch {
-                print("testFetchSheduleBetweenStations: FAIL")
-            }
+    func fetchSchedule(from: String, to: String) async {
+        do {
+            guard let servicesProvider else { return }
+            
+            self.schedules.removeAll()
+            let schedules = try await servicesProvider
+                .schedualBetweenStationsService
+                .getSchedualBetweenStations(
+                    
+                    from: from,
+                    to: to
+                )
+            print("testFetchSheduleBetweenStations: OK")
+            initSchedules(schedules)
+        } catch {
+            print("testFetchSheduleBetweenStations: FAIL")
+            serverError = true
         }
     }
     
@@ -88,6 +87,7 @@ import Foundation
                 print("fetchAllStations: OK")
             } catch {
                 print("fetchAllStations: FAIL")
+                serverError = true
             }
         }
     }
@@ -115,27 +115,24 @@ import Foundation
     }
     
     private func formatDateString(_ dateString: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        
-        guard let date = dateFormatter.date(from: dateString) else {
+        guard let date = DateFormatter.yyyyMMddRu.date(from: dateString) else {
             return nil
         }
         
-        dateFormatter.dateFormat = "d MMMM"
-        return dateFormatter.string(from: date)
+        DateFormatter.yyyyMMddRu.dateFormat = "d MMMM"
+        let result = DateFormatter.yyyyMMddRu.string(from: date)
+        DateFormatter.yyyyMMddRu.dateFormat = "yyyy-MM-dd"
+        return result
     }
     
     private func formatTimeString(_ timeString: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        
-        guard let date = dateFormatter.date(from: timeString) else {
+        guard let date = DateFormatter.HHmmss.date(from: timeString) else {
             return nil
         }
         
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.string(from: date)
+        DateFormatter.HHmmss.dateFormat = "HH:mm"
+        let result = DateFormatter.HHmmss.string(from: date)
+        DateFormatter.HHmmss.dateFormat = "HH:mm:ss"
+        return result
     }
 }

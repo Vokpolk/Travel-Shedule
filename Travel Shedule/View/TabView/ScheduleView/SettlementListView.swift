@@ -1,10 +1,3 @@
-//
-//  SettlementListView.swift
-//  Travel Shedule
-//
-//  Created by Александр Клопков on 23.10.2025.
-//
-
 import SwiftUI
 
 struct SettlementListView: View {
@@ -67,12 +60,10 @@ struct SettlementListView: View {
                                 city = settlement
                                 cityName = settlement.name
                                 if isFrom {
-//                                    viewModel.fisrtStationCode = settlement.name
                                     viewModel.firstData.settlementName = settlement.name
                                     path.append(.fromStationsListView)
                                     print("TRUE")
                                 } else {
-//                                    viewModel.secondStationCode = settlement.name
                                     viewModel.secondData.settlementName = settlement.name
                                     path.append(.toStationsListView)
                                     print("FALSE")
@@ -91,22 +82,17 @@ struct SettlementListView: View {
         .navigationBarItems(leading: backButton)
         .navigationTitle("Выбор города")
         .navigationBarTitleDisplayMode(.inline)
-        .background(.ypWhiteUniversal)
+        .background(.ypWhite)
     }
     
-    // Кастомная кнопка назад в виде галочки
     private var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {
             Image(systemName: "chevron.left")
-                .foregroundColor(.black)
+                .foregroundColor(.ypBlack)
                 .font(.system(size: 18, weight: .medium))
                 .padding(8)
         }
     }
 }
-
-//#Preview {
-//    SettlementListView()
-//}

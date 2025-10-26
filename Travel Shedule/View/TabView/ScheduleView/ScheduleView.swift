@@ -8,8 +8,6 @@ enum Direction {
 struct ScheduleView: View {
     @Binding var path: [Route]
     
-//    @State private var firstCity: String = ""
-//    @State private var secondCity: String = ""
     @Binding var viewModel: SourceViewModel
     
     private let height: Double = 128
@@ -90,7 +88,3 @@ struct ScheduleView: View {
         viewModel.secondData = tempVar
     }
 }
-
-//#Preview {
-//    ScheduleView()
-//}

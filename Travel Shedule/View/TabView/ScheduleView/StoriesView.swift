@@ -1,10 +1,3 @@
-//
-//  StoriesView.swift
-//  Travel Shedule
-//
-//  Created by Александр Клопков on 20.10.2025.
-//
-
 import SwiftUI
 
 struct StoriesView: View {
