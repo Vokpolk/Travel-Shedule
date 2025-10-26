@@ -2,6 +2,7 @@ import Foundation
 
 @Observable class SourceViewModel {
     var serverError: Bool = false
+    var isLoaded: Bool = false
     var cities: [City] = []
     var schedules: [Schedule] = []
     var firstData: CurrentStation = CurrentStation(settlementName: "", stationName: "", code: "")
@@ -24,10 +25,8 @@ import Foundation
                     from: from,
                     to: to
                 )
-            print("testFetchSheduleBetweenStations: OK")
             initSchedules(schedules)
         } catch {
-            print("testFetchSheduleBetweenStations: FAIL")
             serverError = true
         }
     }
@@ -75,7 +74,6 @@ import Foundation
                 let data = try await servicesProvider.allStationService.getAllStations()
                 let country = data.countries?.filter { country in
                     if country.title == "Россия" {
-                        print("РОССИЯ")
                         return true
                     }
                     return false
@@ -83,10 +81,8 @@ import Foundation
                 
                 guard let country else { return }
                 initCities(from: country[0])
-                
-                print("fetchAllStations: OK")
+                isLoaded = true
             } catch {
-                print("fetchAllStations: FAIL")
                 serverError = true
             }
         }

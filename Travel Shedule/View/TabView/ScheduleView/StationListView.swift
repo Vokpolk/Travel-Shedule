@@ -59,13 +59,10 @@ struct StationListView: View {
                                 if isFrom {
                                     viewModel.firstData.stationName = station.name
                                     viewModel.firstData.code = station.code
-                                    print("TRUE")
                                 } else {
                                     viewModel.secondData.stationName = station.name
                                     viewModel.secondData.code = station.code
-                                    print("FALSE")
                                 }
-                                print("Имя станции: \(stationName)")
                                 path.removeAll()
                             }
                     }

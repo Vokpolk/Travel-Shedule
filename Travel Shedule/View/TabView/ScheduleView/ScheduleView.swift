@@ -52,7 +52,6 @@ struct ScheduleView: View {
                     
                     Button {
                         swapScheduleDirection()
-                        print("Test switch: first code - \(viewModel.firstData.code), second code - \(viewModel.secondData.code)")
                     } label: {
                         Image(systemName: "arrow.2.squarepath")
                             .font(.system(size: 18, weight: .regular))

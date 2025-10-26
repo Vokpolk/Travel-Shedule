@@ -49,34 +49,36 @@ struct SettlementListView: View {
                     }
                 )
                 .padding(.horizontal, 16)
-            
-            ScrollView {
-                LazyVStack {
-                    ForEach(searchResults) { settlement in
-                        ChooseCityRowView(title: settlement.name)
-                            .listRowBackground(Color.clear)
-                            .padding(.horizontal, 16)
-                            .onTapGesture {
-                                city = settlement
-                                cityName = settlement.name
-                                if isFrom {
-                                    viewModel.firstData.settlementName = settlement.name
-                                    path.append(.fromStationsListView)
-                                    print("TRUE")
-                                } else {
-                                    viewModel.secondData.settlementName = settlement.name
-                                    path.append(.toStationsListView)
-                                    print("FALSE")
+            if (searchResults.isEmpty && viewModel.isLoaded) {
+                Text("Город не найден")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(.ypBlack)
+            } else {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(searchResults) { settlement in
+                            ChooseCityRowView(title: settlement.name)
+                                .listRowBackground(Color.clear)
+                                .padding(.horizontal, 16)
+                                .onTapGesture {
+                                    city = settlement
+                                    cityName = settlement.name
+                                    if isFrom {
+                                        viewModel.firstData.settlementName = settlement.name
+                                        path.append(.fromStationsListView)
+                                    } else {
+                                        viewModel.secondData.settlementName = settlement.name
+                                        path.append(.toStationsListView)
+                                    }
                                 }
-                                print("Имя поселения: \(cityName)")
-                            }
+                        }
                     }
                 }
+                .listStyle(PlainListStyle())
+                
+                Spacer()
             }
-            .listStyle(PlainListStyle())
-            
-            Spacer()
-            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
