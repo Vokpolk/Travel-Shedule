@@ -23,7 +23,7 @@ final class SchedualBetweenStationsService: SchedualBetweenStationsServiceProtoc
         let response = try await client.getSchedualBetweenStations(query: .init(
             apikey: apikey,
             from: from,
-            to: to)
+            to: to, transfers: true)
         )
         
         return try response.ok.body.json
