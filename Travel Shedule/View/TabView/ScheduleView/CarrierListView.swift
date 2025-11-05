@@ -28,6 +28,10 @@ struct CarrierListView: View {
                             LazyVStack {
                                 ForEach(viewModel.schedules) { schedule in
                                     CarrierCellView(schedule: schedule)
+                                        .onTapGesture {
+//                                            CarrierInfoView(schedule: schedule)
+                                            path.append(.carrierInfo(schedule: schedule))
+                                        }
                                 }
                             }
                             .listStyle(PlainListStyle())

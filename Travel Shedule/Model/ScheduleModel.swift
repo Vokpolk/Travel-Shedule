@@ -1,5 +1,12 @@
 import Foundation
 
+struct Carrier: Identifiable, Hashable {
+    var id = UUID()
+    
+    var email: String?
+    var telephone: String?
+}
+
 struct Schedule: Identifiable, Hashable {
     var id = UUID()
     
@@ -10,5 +17,6 @@ struct Schedule: Identifiable, Hashable {
     var departureTime: String?
     var arrivalTime: String?
     var travelTime: Int?
+    let carrier: Carrier
 }
 
