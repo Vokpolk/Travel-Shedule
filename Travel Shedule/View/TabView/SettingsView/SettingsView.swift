@@ -8,8 +8,7 @@ struct SettingsView: View {
             Toggle("Темная тема", isOn: $themeManager.isDarkMode)
                 .foregroundStyle(.ypBlack)
                 .toggleStyle(SwitchToggleStyle(tint: .ypBlueUniversal))
-                .padding(.top, 20)
-                .padding(.bottom, 20)
+                .padding(.vertical, 20)
             HStack {
                 Text("Пользовательское соглашение")
                     .font(.system(size: 17, weight: .regular))

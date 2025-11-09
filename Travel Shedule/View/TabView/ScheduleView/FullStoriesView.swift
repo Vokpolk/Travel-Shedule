@@ -18,7 +18,7 @@ struct FullStoriesView: View {
     
     private let configuration: Configuration
     private var currentStory: FullStoryModel {
-        return fullViewModel.fullStories.stories[index].storiesPack[currentStoryIndex]
+        fullViewModel.fullStories.stories[index].storiesPack[currentStoryIndex]
     }
     
     private var currentStoryIndex: Int {

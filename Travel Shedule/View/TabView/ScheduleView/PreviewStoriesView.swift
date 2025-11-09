@@ -7,7 +7,7 @@ struct PreviewStoriesView: View {
     @State private var index: Int = 0
     var body: some View {
         ScrollView (.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: [GridItem(.flexible())], alignment: .center, spacing: 12) {
+            LazyHGrid(rows: [GridItem(.flexible())], spacing: 12) {
                 ForEach(0..<previewViewModel.previewStories.stories.count) { index in
                     PreviewStoryView(viewModel: $previewViewModel, index: index)
                         .onTapGesture {
