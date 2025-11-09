@@ -13,7 +13,7 @@ struct ScheduleView: View {
     private let height: Double = 128
     var body: some View {
         VStack {
-            StoriesView()
+            PreviewStoriesView()
             
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 20)

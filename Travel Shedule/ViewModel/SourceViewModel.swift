@@ -53,6 +53,15 @@ import Foundation
                 arrivalTime = formatTimeString(arrivalTimeSchedule)
             }
             
+            var email: String?
+            var telephone: String?
+            if let email_ = schedule.thread?.carrier?.email {
+                email = email_
+            }
+            if let phone = schedule.thread?.carrier?.phone {
+                telephone = phone
+            }
+            let carrier = Carrier(email: email, telephone: telephone)
             
             self.schedules.append(Schedule(
                 carrierName: schedule.thread?.carrier?.title,
@@ -61,7 +70,8 @@ import Foundation
                 hasTransfer: schedule.has_transfers,
                 departureTime: departureTime,
                 arrivalTime: arrivalTime,
-                travelTime: (schedule.duration ?? 0) / 3600
+                travelTime: (schedule.duration ?? 0) / 3600,
+                carrier: carrier
             ))
         }
     }

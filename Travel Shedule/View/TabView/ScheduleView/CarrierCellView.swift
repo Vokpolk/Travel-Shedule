@@ -84,6 +84,7 @@ struct CarrierCellView: View {
         hasTransfer: true,
         departureTime: "19:40",
         arrivalTime: "20:30",
-        travelTime: 1
+        travelTime: 1,
+        carrier: Carrier()
     ))
 }

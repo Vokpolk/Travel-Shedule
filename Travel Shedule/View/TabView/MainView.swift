@@ -1,13 +1,15 @@
 import SwiftUI
 import Network
 
-enum Route:  Hashable {
+enum Route: Hashable {
     case fromSettlementsListView
     case toSettlementsListView
     case fromStationsListView
     case toStationsListView
     case carrierListView
     case scheduleFilterView
+    case carrierInfo(schedule: Schedule)
+    case userAgreement
 }
 
 struct MainView: View {
@@ -33,7 +35,7 @@ struct MainView: View {
                                     .renderingMode(.template)
                             }
                             .background(.ypWhite)
-                        Text("Settings")
+                        SettingsView(path: $path)
                             .tabItem {
                                 Image(.settings)
                                     .renderingMode(.template)
@@ -55,6 +57,10 @@ struct MainView: View {
                             CarrierListView(path: $path, viewModel: viewModel)
                         case .scheduleFilterView:
                             ScheduleFilterView()
+                        case .carrierInfo(let schedule):
+                            CarrierInfoView(path: $path, schedule: schedule)
+                        case .userAgreement:
+                            UserAgreementView()
                         }
                     }
                 }
