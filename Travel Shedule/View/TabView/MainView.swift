@@ -14,6 +14,10 @@ enum Route: Hashable {
 
 struct MainView: View {
     @State private var isConnected = true
+    @State var themeManager: ThemeManagerViewModel
+    init(themeManager: ThemeManagerViewModel) {
+        self.themeManager = themeManager
+    }
     
     @State private var path = [Route]()
     @State private var viewModel = SourceViewModel()
@@ -35,7 +39,7 @@ struct MainView: View {
                                     .renderingMode(.template)
                             }
                             .background(.ypWhite)
-                        SettingsView(path: $path)
+                        SettingsView(themeManager: $themeManager, path: $path)
                             .tabItem {
                                 Image(.settings)
                                     .renderingMode(.template)
@@ -80,8 +84,4 @@ struct MainView: View {
         }
         monitor.start(queue: DispatchQueue.global(qos: .background))
     }
-}
-
-#Preview {
-    MainView()
 }

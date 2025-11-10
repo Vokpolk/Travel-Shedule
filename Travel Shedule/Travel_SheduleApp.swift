@@ -2,12 +2,12 @@ import SwiftUI
 
 @main
 struct Travel_SheduleApp: App {
-    @StateObject private var themeManager = ThemeManager()
+    private var themeManager = ThemeManagerViewModel()
     
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environmentObject(themeManager)
+            MainView(themeManager: themeManager)
+                .environment(themeManager)
                 .preferredColorScheme(themeManager.colorScheme)
         }
     }
