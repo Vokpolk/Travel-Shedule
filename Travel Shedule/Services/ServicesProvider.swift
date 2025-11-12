@@ -2,7 +2,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
-final class ServicesProvider {
+actor ServicesProvider {
     
     private let client: Client
     
