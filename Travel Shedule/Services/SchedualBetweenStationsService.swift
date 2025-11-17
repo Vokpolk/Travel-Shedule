@@ -8,7 +8,7 @@ protocol SchedualBetweenStationsServiceProtocol {
     func getSchedualBetweenStations(from: String, to: String) async throws -> SchedualBetweenStations
 }
 
-final class SchedualBetweenStationsService: SchedualBetweenStationsServiceProtocol {
+actor SchedualBetweenStationsService: SchedualBetweenStationsServiceProtocol {
     
     private let client: Client
     

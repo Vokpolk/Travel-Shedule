@@ -1,14 +1,14 @@
 import SwiftUI
 
-final class ThemeManager: ObservableObject {
-    @Published var isDarkMode: Bool {
+@Observable final class ThemeManagerViewModel {
+    var isDarkMode: Bool {
         didSet {
             UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
             updateColorScheme()
         }
     }
     
-    @Published var colorScheme: ColorScheme = .light
+    var colorScheme: ColorScheme = .light
     
     init() {
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")

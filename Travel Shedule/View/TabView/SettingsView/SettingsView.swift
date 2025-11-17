@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var themeManager: ThemeManager
+    @Binding var themeManager: ThemeManagerViewModel
     @Binding var path: [Route]
     var body: some View {
         VStack {

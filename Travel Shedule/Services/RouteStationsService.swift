@@ -8,7 +8,7 @@ protocol RouteStationsServiceProtocol {
     func getRouteStations(uid: String) async throws -> RouteStations
 }
 
-final class RouteStationsService: RouteStationsServiceProtocol {
+actor RouteStationsService: RouteStationsServiceProtocol {
     
     private let client: Client
     
